@@ -6,14 +6,13 @@
     }
 }
 
-
 interface Array<T> {
-    add(numberToAdd: number, selector: () => T): void;
+    add(numberToAdd: number, generator: () => T): void;
 }
 
-Array.prototype.add = function (numberToAdd: number, selector: () => any) {
+Array.prototype.add = function (numberToAdd: number, generator: () => any) {
     for (var i = 0; i < numberToAdd; i++) {
-        this.push(selector());
+        this.push(generator());
     }
 }
  

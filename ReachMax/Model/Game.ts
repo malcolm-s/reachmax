@@ -1,10 +1,9 @@
 ﻿/// <reference path="../scripts/typings/knockout/knockout.d.ts" />
 
 class GameViewModel {
-    time: KnockoutObservable<number>;
+    timer: KnockoutObservable<Counter>;
     constructor(public game: Game) {
-        var current = game.timeCounter.current;
-        this.time = ko.observable(current);
+        this.timer = ko.observable(game.timeCounter);
     }
 }
 
@@ -19,7 +18,7 @@ class Game implements Updatable {
 
         this.timeCounter = new Counter(
             5,
-            c => c.current++, //$(".timer-progress").val(((c.current / c.maximum) * 100).toString());            
+            c => c.current++,
             (() => this.activateNextPlayer()).bind(this));
 
         this.scoreCounter = new Counter(

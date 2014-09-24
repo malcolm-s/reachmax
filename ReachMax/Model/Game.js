@@ -2,8 +2,7 @@
 var GameViewModel = (function () {
     function GameViewModel(game) {
         this.game = game;
-        var current = game.timeCounter.current;
-        this.time = ko.observable(current);
+        this.timer = ko.observable(game.timeCounter);
     }
     return GameViewModel;
 })();

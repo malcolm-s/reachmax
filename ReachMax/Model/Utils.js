@@ -8,9 +8,9 @@
     return AutoNumber;
 })();
 
-Array.prototype.add = function (numberToAdd, selector) {
+Array.prototype.add = function (numberToAdd, generator) {
     for (var i = 0; i < numberToAdd; i++) {
-        this.push(selector());
+        this.push(generator());
     }
 };
 //# sourceMappingURL=Utils.js.map
