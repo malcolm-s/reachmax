@@ -1,13 +1,22 @@
-﻿var Game = (function () {
+﻿/// <reference path="../scripts/typings/knockout/knockout.d.ts" />
+var GameViewModel = (function () {
+    function GameViewModel(game) {
+        this.game = game;
+        var current = game.timeCounter.current;
+        this.time = ko.observable(current);
+    }
+    return GameViewModel;
+})();
+
+var Game = (function () {
     function Game(max, loop) {
         var _this = this;
         this.loop = loop;
         this.players = [];
         this.loop = loop;
 
-        this.timeCounter = new Counter(100, function (c) {
-            c.current++;
-            $(".timer-progress").val(((c.current / c.maximum) * 100).toString());
+        this.timeCounter = new Counter(5, function (c) {
+            return c.current++;
         }, (function () {
             return _this.activateNextPlayer();
         }).bind(this));

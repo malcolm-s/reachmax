@@ -1,4 +1,12 @@
-﻿class Counter implements Updatable {
+﻿interface ICounter extends Updatable {
+    maximum: number;
+    current: number;
+    onUpdate: (c: ICounter) => void;
+    onEqual: () => void;
+    resetOnEqual: boolean;
+}
+
+class Counter implements Updatable {
     constructor(public maximum: number,
         private onUpdate: (c: Counter) => void,
         private onEqual: () => void,
@@ -17,4 +25,21 @@
             }
         }
     }
-} 
+}
+
+class ViewableCounter extends Counter {
+    currentView: KnockoutObservable<number>;
+    constructor(
+        maximum: number,
+        current: number,
+        onUpdate: (c: Counter) => void,
+        onEqual: () => void,
+        resetOnEqual: boolean = true) {
+        super(maximum, onUpdate, onEqual, resetOnEqual, current);
+
+        this.currentView = ko.observable(this.current);
+    }
+
+    update() {
+    }
+}
