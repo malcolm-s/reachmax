@@ -1,0 +1,6 @@
+c:\users\malcolm.stone\documents\visual studio 2013\Projects\ReachMax\ReachMax\bin\ReachMax.dll.config
+c:\users\malcolm.stone\documents\visual studio 2013\Projects\ReachMax\ReachMax\bin\ReachMax.dll
+c:\users\malcolm.stone\documents\visual studio 2013\Projects\ReachMax\ReachMax\bin\ReachMax.pdb
+c:\users\malcolm.stone\documents\visual studio 2013\Projects\ReachMax\ReachMax\obj\Debug\ReachMax.csprojResolveAssemblyReference.cache
+c:\users\malcolm.stone\documents\visual studio 2013\Projects\ReachMax\ReachMax\obj\Debug\ReachMax.dll
+c:\users\malcolm.stone\documents\visual studio 2013\Projects\ReachMax\ReachMax\obj\Debug\ReachMax.pdb

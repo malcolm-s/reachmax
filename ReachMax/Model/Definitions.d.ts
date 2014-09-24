@@ -1,0 +1,3 @@
+﻿interface Updatable {
+    update: () => void;
+}
