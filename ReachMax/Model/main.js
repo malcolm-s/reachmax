@@ -12,7 +12,6 @@ $(function () {
 
     $("#increase").click(function (e) {
         game.getActivePlayer().addToGame();
-        var x = 10;
     });
 });
 //# sourceMappingURL=main.js.map

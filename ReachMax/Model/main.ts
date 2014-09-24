@@ -13,6 +13,5 @@ $(() => {
 
     $("#increase").click(e => {
         game.getActivePlayer().addToGame();
-        var x = 10;
     });
 }); 
