@@ -1,23 +1,23 @@
 ﻿/// <reference path="../scripts/typings/knockout/knockout.d.ts" />
-var GameView = (function () {
-    function GameView(maximum, secondsPerTurn) {
+var Game = (function () {
+    function Game(maximum, secondsPerTurn) {
         var _this = this;
         this.secondsPerTurn = secondsPerTurn;
         this.maximum = ko.observable();
         this.current = ko.observable(0);
         this.players = ko.observableArray([]);
-        this.loser = ko.observable(new PlayerView(this));
+        this.loser = ko.observable(new Player(this));
         this.maximum(maximum);
         this.inProgress = ko.computed(function () {
             return _this.current() != _this.maximum();
         });
 
         this.players().add(5, function () {
-            return new PlayerView(_this, 3);
+            return new Player(_this);
         });
         this.start();
     }
-    GameView.prototype.start = function () {
+    Game.prototype.start = function () {
         var _this = this;
         this.players()[0].activate();
         this.loopId = setInterval(function () {
@@ -25,17 +25,17 @@ var GameView = (function () {
         }, this.secondsPerTurn * 1000);
     };
 
-    GameView.prototype.stop = function () {
+    Game.prototype.stop = function () {
         clearInterval(this.loopId);
     };
 
-    GameView.prototype.getActivePlayer = function () {
+    Game.prototype.getActivePlayer = function () {
         return this.players().filter(function (p) {
             return p.isActive();
         })[0];
     };
 
-    GameView.prototype.activateNextPlayer = function () {
+    Game.prototype.activateNextPlayer = function () {
         var currentPlayer = this.getActivePlayer(), nextPlayerIndex = this.players().indexOf(currentPlayer) + 1;
         currentPlayer.isActive(false);
 
@@ -46,7 +46,7 @@ var GameView = (function () {
         this.players()[nextPlayerIndex].isActive(true);
     };
 
-    GameView.prototype.add = function () {
+    Game.prototype.add = function () {
         if (this.inProgress()) {
             var currentScore = this.current();
             this.current(currentScore + 1);
@@ -54,38 +54,6 @@ var GameView = (function () {
             this.loser = ko.observable(this.getActivePlayer());
         }
     };
-    return GameView;
+    return Game;
 })();
-
-var PlayerView = (function () {
-    function PlayerView(game, maximum) {
-        var _this = this;
-        this.game = game;
-        this.current = ko.observable(0);
-        this.isActive = ko.observable(false);
-        this.maximum = maximum;
-        this.canAdd = ko.computed(function () {
-            return _this.current() < _this.maximum;
-        });
-    }
-    PlayerView.prototype.activate = function () {
-        this.isActive(true);
-        this.current(0);
-    };
-    PlayerView.prototype.deactivate = function () {
-        this.isActive(false);
-    };
-
-    PlayerView.prototype.add = function () {
-        if (this.canAdd()) {
-            // Increase game score
-            var currentScore = this.game.current();
-            this.game.current(currentScore + 1);
-
-            // Increase current total
-            this.current(this.current() + 1);
-        }
-    };
-    return PlayerView;
-})();
-//# sourceMappingURL=GameVM.js.map
+//# sourceMappingURL=Game.js.map

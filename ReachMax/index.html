@@ -18,16 +18,25 @@
 <body>
     <h1>ReachMax</h1>
     <div class="content">
+        <div class="settings">
+            <p>Game maximum: <span data-bind="text: gameMax"></span></p>
+            <p>Seconds per turn: <span data-bind="text: secondsPerTurn"></span></p>
+        </div>
         <div class="game">
-            <span>
-                Current total: <span data-bind="text: current"></span> out of <span data-bind="text: maximum"></span>
-            </span>
-            <div data-bind="foreach: players">
-                <div>
-                    <div>Player <span data-bind="text: isActive() ? 'active' : 'inactive'"></span></div>
-                    <input type="submit" value="Add!" data-bind="click: add, visible: isActive"/>
+            <!-- Finished -->
+            <div data-bind="visible: !inProgress()">
+                Game finished! Player <span data-bind="text: loser"></span> won!
+            </div>
+            <!-- In Progress -->
+            <div data-bind="visible: inProgress()">
+                <!-- Game -->
+                <span>
+                    Current total: <span data-bind="text: current"></span> out of <span data-bind="text: maximum"></span>
+                </span>
+                <!-- Players -->
+                <div data-bind="foreach: players">
                     <div>
-                        <div class=""></div>
+                        Player <span data-bind="text: isActive() ? 'ACTIVE' : ''"></span>
                     </div>
                 </div>
             </div>

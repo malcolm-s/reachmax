@@ -1,23 +1,14 @@
 ﻿/// <reference path="../scripts/typings/jquery/jquery.d.ts" />
-var gamevm: GameView;
+var gamevm: Game;
 $(() => {
-    //var loop: Loop;
-    //var game: Game;
-    //$("#start-game").click(e => {
-    //    if (loop !== undefined) {
-    //        loop.stop();
-    //    }
-    //    loop = new Loop(1000);
-    //    game = loop.createGame(15);
-    //    gamevm = new GameViewModel(game);
-    //    ko.applyBindings(gamevm);
-    //});
+    gamevm = new Game(15, 3);
 
-    //$("#increase").click(e => {
-    //    game.getActivePlayer().addToGame();
-    //});    
-
-    gamevm = new GameView(15, 3);
+    $(document).keyup(e => {
+        var spaceKeyCode = 32;
+        if (e.which == 32) {
+            gamevm.getActivePlayer().add();
+        }
+    });
 
     ko.applyBindings(gamevm, document.querySelector(".game"));
-}); 
+});
