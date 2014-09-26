@@ -1,34 +1,35 @@
 ﻿/// <reference path="../scripts/typings/knockout/knockout.d.ts" />
-
-class Game {
+declare var settings: SettingsVM;
+class GameVM {
     loopId: number;
 
     maximum: KnockoutObservable<number> = ko.observable<number>();
     current: KnockoutObservable<number> = ko.observable(0);
     inProgress: KnockoutComputed<boolean>;
 
-    players: KnockoutObservableArray<Player> = ko.observableArray([]);
-    loser: KnockoutObservable<Player> = ko.observable(new Player(this));
+    players: KnockoutObservableArray<PlayerVM> = ko.observableArray([]);
+    loser: KnockoutObservable<PlayerVM> = ko.observable<PlayerVM>();
 
-    constructor(maximum: number,
-        public secondsPerTurn: number) {
-        this.maximum(maximum);
+    constructor() {
+        this.maximum(settings.gameMax());
         this.inProgress = ko.computed(() => this.current() != this.maximum());
 
-        this.players().add(5, () => new Player(this));
+        this.players().add(5, () => new PlayerVM(this));
         this.start();
     }
 
     start(): void {
         this.players()[0].activate();
-        this.loopId = setInterval(() => this.activateNextPlayer(), this.secondsPerTurn * 1000);
+        this.loopId = setInterval(
+            () => this.activateNextPlayer(),
+            settings.secondsPerTurn() * 1000);
     }
 
     stop(): void {
         clearInterval(this.loopId);
     }
 
-    getActivePlayer(): Player {
+    getActivePlayer(): PlayerVM {
         return this.players().filter(p => p.isActive())[0];
     }
 

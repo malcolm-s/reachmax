@@ -1,7 +1,13 @@
 ﻿/// <reference path="../scripts/typings/jquery/jquery.d.ts" />
-var gamevm: Game;
+var gamevm: GameVM;
+var settings: SettingsVM;
 $(() => {
-    gamevm = new Game(15, 3);
+    settings = new SettingsVM();
+
+    ko.applyBindings(settings, document.querySelector(".settings"));
+
+
+    gamevm = new GameVM();
 
     $(document).keyup(e => {
         var spaceKeyCode = 32;

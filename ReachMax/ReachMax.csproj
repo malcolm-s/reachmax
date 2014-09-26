@@ -38,9 +38,9 @@
     <TypeScriptCompile Include="Model\Utils.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\knockout\knockout.d.ts" />
-    <TypeScriptCompile Include="ViewModels\Game.ts" />
-    <TypeScriptCompile Include="ViewModels\Player.ts" />
-    <TypeScriptCompile Include="ViewModels\Settings.ts" />
+    <TypeScriptCompile Include="ViewModels\GameVM.ts" />
+    <TypeScriptCompile Include="ViewModels\PlayerVM.ts" />
+    <TypeScriptCompile Include="ViewModels\SettingsVM.ts" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\jquery-2.1.1.min.map" />

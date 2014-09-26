@@ -7,21 +7,21 @@
     <link rel="stylesheet" href="Styles/app.css" type="text/css" />
     <script src="Scripts/jquery-2.1.1.js"></script>
     <script src="Scripts/knockout-3.2.0.debug.js"></script>
-    <script src="Model/Loop.js"></script>
-    <script src="Model/Game.js"></script>
-    <script src="Model/Player.js"></script>
-    <script src="Model/Counter.js"></script>
-    <script src="Model/Utils.js"></script>
     <script src="ViewModels/GameVM.js"></script>
-    <script src="Model/main.js"></script>
+    <script src="ViewModels/PlayerVM.js"></script>
+    <script src="ViewModels/SettingsVM.js"></script>
+    <script src="Model/Utils.js"></script>
+    <script src="Model/Main.js"></script>
 </head>
 <body>
     <h1>ReachMax</h1>
     <div class="content">
+        <!-- Settings -->
         <div class="settings">
             <p>Game maximum: <span data-bind="text: gameMax"></span></p>
             <p>Seconds per turn: <span data-bind="text: secondsPerTurn"></span></p>
         </div>
+        <!-- Game -->
         <div class="game">
             <!-- Finished -->
             <div data-bind="visible: !inProgress()">
@@ -29,7 +29,7 @@
             </div>
             <!-- In Progress -->
             <div data-bind="visible: inProgress()">
-                <!-- Game -->
+                <!-- Score -->
                 <span>
                     Current total: <span data-bind="text: current"></span> out of <span data-bind="text: maximum"></span>
                 </span>
