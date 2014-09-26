@@ -18,7 +18,9 @@
     <div class="content">
         <!-- Settings -->
         <div class="settings">
-            <p>Game maximum: <span data-bind="text: gameMax"></span></p>
+            <p>
+                <button data-bind="click: decreaseObs.bind($data.gameMax)">-</button>Game maximum: <span data-bind="text: gameMax"></span><button data-bind="click: increase">+</button>
+            </p>
             <p>Seconds per turn: <span data-bind="text: secondsPerTurn"></span></p>
         </div>
         <!-- Game -->
