@@ -5,7 +5,7 @@
         this.name = ko.observable("");
         this.current = ko.observable(0);
         this.isActive = ko.observable(false);
-        this.maximum = settings.secondsPerTurn();
+        this.maximum = settings.secondsPerTurn().current();
         this.name(name);
         this.canAdd = ko.computed(function () {
             return _this.current() < _this.maximum;

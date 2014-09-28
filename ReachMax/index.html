@@ -9,6 +9,7 @@
     <script src="Scripts/knockout-3.2.0.debug.js"></script>
     <script src="Source/Game.js"></script>
     <script src="Source/Player.js"></script>
+    <script src="Source/Counter.js"></script>
     <script src="Source/Settings.js"></script>
     <script src="Source/Utils.js"></script>
     <script src="Source/Main.js"></script>
@@ -18,24 +19,42 @@
     <div class="content">
         <!-- Settings -->
         <div class="settings">
-            <p>
-                <button data-bind="click: gameMaxCounter().decrease()">
+            <div data-bind="foreach: counters">
+                <button data-bind="click: decrease">
                     -
                 </button>
-                Game maximum: <span data-bind="text: gameMaxCounter().current"></span>
-                <button data-bind="click: gameMaxCounter().increase()">
+                <span data-bind="text: name"></span>: <span data-bind="text: current"></span>
+                <button data-bind="click: increase">
+                    +
+                </button>
+            </div>
+            <!--<p>
+                <button data-bind="click: gameMax().decrease()">
+                    -
+                </button>
+                Game maximum: <span data-bind="text: gameMax().current"></span>
+                <button data-bind="click: gameMax().increase()">
                     +
                 </button>
             </p>
-            <p>Seconds per turn: <span data-bind="text: secondsPerTurn"></span></p>
+            <p>
+                <button data-bind="click: secondsPerTurn().decrease()">
+                    -
+                </button>
+                Seconds per turn: <span data-bind="text: secondsPerTurn().current"></span>
+                <button data-bind="click: secondsPerTurn().increase()">
+                    +
+                </button>
+            </p>-->
+            <button type="button" data-bind="click: applySettings">Apply settings</button>
         </div>
         <!-- Game -->
         <div class="game">
-            <div>
-                <input type="text" data-bind="text: playerNameInput" />
-                <button data-bind="click: addPlayer()">Add player!</button>
-            </div>
-
+            <!-- Add players -->
+            <form data-bind="submit: addPlayer">
+                Add player: <input type="text" data-bind="value: playerNameInput, valueUpdate: 'afterkeydown'" />
+                <button type="submit" data-bind="enable: playerNameInput().length > 0">Add!</button>
+            </form>
             <!-- Finished -->
             <div data-bind="visible: !inProgress()">
                 Game finished! Player <span data-bind="text: loser"></span> won!

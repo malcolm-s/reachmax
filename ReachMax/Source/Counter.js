@@ -1,39 +1,21 @@
-﻿//interface ICounter extends Updatable {
-//    maximum: number;
-//    current: number;
-//    onUpdate: (c: ICounter) => void;
-//    onEqual: () => void;
-//    resetOnEqual: boolean;
-//}
-//class Counter implements Updatable {
-//    constructor(public maximum: number,
-//        private onUpdate: (c: Counter) => void,
-//        private onEqual: () => void,
-//        private resetOnEqual: boolean = true,
-//        public current: number = 0) {
-//    }
-//    update() {
-//        this.onUpdate(this);
-//        if (this.current == this.maximum) {
-//            this.onEqual();
-//            if (this.resetOnEqual) {
-//                this.current = 0;
-//            }
-//        }
-//    }
-//}
-//class ViewableCounter extends Counter {
-//    currentView: KnockoutObservable<number>;
-//    constructor(
-//        maximum: number,
-//        current: number,
-//        onUpdate: (c: Counter) => void,
-//        onEqual: () => void,
-//        resetOnEqual: boolean = true) {
-//        super(maximum, onUpdate, onEqual, resetOnEqual, current);
-//        this.currentView = ko.observable(this.current);
-//    }
-//    update() {
-//    }
-//}
+﻿var Counter = (function () {
+    function Counter(name, startingNumber, increment, decrement) {
+        if (typeof startingNumber === "undefined") { startingNumber = 0; }
+        if (typeof increment === "undefined") { increment = 1; }
+        if (typeof decrement === "undefined") { decrement = 1; }
+        this.name = name;
+        this.increment = increment;
+        this.decrement = decrement;
+        this.current = ko.observable(0);
+        this.current(startingNumber);
+    }
+    Counter.prototype.increase = function () {
+        this.current(this.current() + this.increment);
+    };
+
+    Counter.prototype.decrease = function () {
+        this.current(this.current() - this.decrement);
+    };
+    return Counter;
+})();
 //# sourceMappingURL=Counter.js.map

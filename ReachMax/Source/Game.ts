@@ -12,10 +12,10 @@ class Game {
     loser: KnockoutObservable<Player> = ko.observable<Player>();
 
     constructor() {
-        this.maximum(settings.gameMax());
+        this.maximum(settings.gameMax().current());
         this.inProgress = ko.computed(() => this.current() != this.maximum());
 
-        this.players().add(5, () => new Player(this, "test"));
+        this.players().add(1, () => new Player(this, "Malcolm"));
         this.start();
     }
 
@@ -23,7 +23,7 @@ class Game {
         this.players()[0].activate();
         this.loopId = setInterval(
             () => this.activateNextPlayer(),
-            settings.secondsPerTurn() * 1000);
+            settings.secondsPerTurn().current() * 1000);
     }
 
     stop(): void {
@@ -34,6 +34,7 @@ class Game {
         var name = this.playerNameInput();
         if (name !== "") {
             this.players.push(new Player(this, name));
+            this.playerNameInput("");
         }
     }
 
@@ -52,14 +53,5 @@ class Game {
 
         this.players()[nextPlayerIndex].isActive(true);
     }
-
-    //add(): void {
-    //    if (this.inProgress()) {
-    //        var currentScore = this.current();
-    //        this.current(currentScore + 1);
-    //    } else {
-    //        this.loser = ko.observable(this.getActivePlayer());
-    //    }
-    //}
 }
 

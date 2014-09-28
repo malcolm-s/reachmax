@@ -1,30 +1,15 @@
-﻿var Counter = (function () {
-    function Counter(startingNumber, increment, decrement) {
-        if (typeof startingNumber === "undefined") { startingNumber = 0; }
-        if (typeof increment === "undefined") { increment = 1; }
-        if (typeof decrement === "undefined") { decrement = 1; }
-        this.increment = increment;
-        this.decrement = decrement;
-        this.current = ko.observable(0);
-        this.current(startingNumber);
-    }
-    Counter.prototype.increase = function () {
-        this.current(this.current() + this.increment);
-    };
-
-    Counter.prototype.decrease = function () {
-        this.current(this.current() - this.decrement);
-    };
-    return Counter;
-})();
-
-var Settings = (function () {
+﻿var Settings = (function () {
     function Settings() {
-        this.gameMaxCounter = ko.observable(new Counter(15));
-        this.gameMax = ko.observable(15);
-        this.secondsPerTurn = ko.observable(5);
+        this.gameMax = ko.observable(new Counter("Game max", 15));
+        this.secondsPerTurn = ko.observable(new Counter("Seconds per turn", 4));
+        this.maxIncreasePerTurn = ko.observable(new Counter("Max increase per turn", 5));
+        this.counters = ko.observableArray([]);
         this.maxPlayers = 5;
+        this.counters().push(this.gameMax, this.secondsPerTurn, this.maxIncreasePerTurn);
     }
+    Settings.prototype.applySettings = function () {
+        gamevm = new Game();
+    };
     return Settings;
 })();
 //# sourceMappingURL=Settings.js.map

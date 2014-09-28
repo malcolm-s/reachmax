@@ -8,7 +8,7 @@ class Player {
     canAdd: KnockoutComputed<boolean>;
 
     constructor(public game: Game, name: string) {
-        this.maximum = settings.secondsPerTurn();
+        this.maximum = settings.secondsPerTurn().current();
         this.name(name);
         this.canAdd = ko.computed(() => this.current() < this.maximum);
     }

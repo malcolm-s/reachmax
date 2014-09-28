@@ -7,13 +7,13 @@ var Game = (function () {
         this.playerNameInput = ko.observable("");
         this.players = ko.observableArray([]);
         this.loser = ko.observable();
-        this.maximum(settings.gameMax());
+        this.maximum(settings.gameMax().current());
         this.inProgress = ko.computed(function () {
             return _this.current() != _this.maximum();
         });
 
-        this.players().add(5, function () {
-            return new Player(_this, "test");
+        this.players().add(1, function () {
+            return new Player(_this, "Malcolm");
         });
         this.start();
     }
@@ -22,7 +22,7 @@ var Game = (function () {
         this.players()[0].activate();
         this.loopId = setInterval(function () {
             return _this.activateNextPlayer();
-        }, settings.secondsPerTurn() * 1000);
+        }, settings.secondsPerTurn().current() * 1000);
     };
 
     Game.prototype.stop = function () {
@@ -33,6 +33,7 @@ var Game = (function () {
         var name = this.playerNameInput();
         if (name !== "") {
             this.players.push(new Player(this, name));
+            this.playerNameInput("");
         }
     };
 

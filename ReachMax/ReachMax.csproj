@@ -29,6 +29,7 @@
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="Source\Counter.ts" />
     <TypeScriptCompile Include="Source\Definitions.d.ts" />
     <TypeScriptCompile Include="Source\Main.ts" />
     <TypeScriptCompile Include="Source\Utils.ts" />

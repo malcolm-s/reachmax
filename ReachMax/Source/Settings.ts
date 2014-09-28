@@ -1,22 +1,19 @@
-﻿class Counter {
-    current: KnockoutObservable<number> = ko.observable(0);
-
-    constructor(startingNumber: number= 0, private increment: number= 1, private decrement: number= 1) {
-        this.current(startingNumber);
-    }
-
-    increase(): void {
-        this.current(this.current() + this.increment);
-    }
-
-    decrease(): void {
-        this.current(this.current() - this.decrement);
-    }
-}
+﻿declare var gamevm: Game;
 
 class Settings {
-    gameMaxCounter: KnockoutObservable<Counter> = ko.observable(new Counter(15));
-    gameMax: KnockoutObservable<number> = ko.observable(15);
-    secondsPerTurn: KnockoutObservable<number> = ko.observable(5);
+    gameMax: KnockoutObservable<Counter> = ko.observable(new Counter("Game max", 15));
+    secondsPerTurn: KnockoutObservable<Counter> = ko.observable(new Counter("Seconds per turn", 4));
+    maxIncreasePerTurn: KnockoutObservable<Counter> = ko.observable(new Counter("Max increase per turn", 5));
+
+    counters: KnockoutObservableArray<KnockoutObservable<Counter>> = ko.observableArray([]);
+
     maxPlayers: number = 5;
+
+    constructor() {
+        this.counters().push(this.gameMax, this.secondsPerTurn, this.maxIncreasePerTurn);
+    }
+
+    applySettings(): void {
+        gamevm = new Game();
+    }
 }
