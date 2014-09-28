@@ -3,11 +3,11 @@ var gamevm;
 var settings;
 $(function () {
     // initialise settings - needed for building the game and players
-    settings = new SettingsVM();
+    settings = new Settings();
     ko.applyBindings(settings, document.querySelector(".settings"));
 
     // initialise game
-    gamevm = new GameVM();
+    gamevm = new Game();
     ko.applyBindings(gamevm, document.querySelector(".game"));
 
     // bind user input handler

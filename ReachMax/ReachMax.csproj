@@ -26,23 +26,17 @@
     <Content Include="Scripts\knockout-3.2.0.js" />
     <Content Include="Styles\app.css" />
     <Content Include="index.html" />
-    <Content Include="Templates\CounterTemplate.html" />
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="Model\Counter.ts" />
-    <TypeScriptCompile Include="Model\Definitions.d.ts" />
-    <TypeScriptCompile Include="Model\Game.ts" />
-    <TypeScriptCompile Include="Model\Loop.ts" />
-    <TypeScriptCompile Include="Model\Main.ts" />
-    <TypeScriptCompile Include="Model\Player.ts" />
-    <TypeScriptCompile Include="Model\Utils.ts" />
+    <TypeScriptCompile Include="Source\Definitions.d.ts" />
+    <TypeScriptCompile Include="Source\Main.ts" />
+    <TypeScriptCompile Include="Source\Utils.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\knockout\knockout.d.ts" />
-    <TypeScriptCompile Include="Templates\CounterTemplate.ts" />
-    <TypeScriptCompile Include="ViewModels\GameVM.ts" />
-    <TypeScriptCompile Include="ViewModels\PlayerVM.ts" />
-    <TypeScriptCompile Include="ViewModels\SettingsVM.ts" />
+    <TypeScriptCompile Include="Source\Game.ts" />
+    <TypeScriptCompile Include="Source\Player.ts" />
+    <TypeScriptCompile Include="Source\Settings.ts" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\jquery-2.1.1.min.map" />

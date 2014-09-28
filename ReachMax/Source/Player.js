@@ -1,23 +1,26 @@
-﻿var PlayerVM = (function () {
-    function PlayerVM(game) {
+﻿var Player = (function () {
+    function Player(game, name) {
         var _this = this;
         this.game = game;
+        this.name = ko.observable("");
         this.current = ko.observable(0);
         this.isActive = ko.observable(false);
         this.maximum = settings.secondsPerTurn();
+        this.name(name);
         this.canAdd = ko.computed(function () {
             return _this.current() < _this.maximum;
         });
     }
-    PlayerVM.prototype.activate = function () {
+    Player.prototype.activate = function () {
         this.isActive(true);
         this.current(0);
     };
-    PlayerVM.prototype.deactivate = function () {
+
+    Player.prototype.deactivate = function () {
         this.isActive(false);
     };
 
-    PlayerVM.prototype.add = function () {
+    Player.prototype.add = function () {
         if (this.canAdd()) {
             // Increase game score
             var currentScore = this.game.current();
@@ -27,6 +30,6 @@
             this.current(this.current() + 1);
         }
     };
-    return PlayerVM;
+    return Player;
 })();
-//# sourceMappingURL=PlayerVM.js.map
+//# sourceMappingURL=Player.js.map

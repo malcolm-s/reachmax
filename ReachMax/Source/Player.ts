@@ -1,13 +1,15 @@
-﻿declare var settings: SettingsVM;
+﻿declare var settings: Settings;
 
-class PlayerVM {
+class Player {
+    name: KnockoutObservable<string> = ko.observable("");
     maximum: number;
     current: KnockoutObservable<number> = ko.observable(0);
     isActive: KnockoutObservable<boolean> = ko.observable(false);
     canAdd: KnockoutComputed<boolean>;
 
-    constructor(public game: GameVM) {
+    constructor(public game: Game, name: string) {
         this.maximum = settings.secondsPerTurn();
+        this.name(name);
         this.canAdd = ko.computed(() => this.current() < this.maximum);
     }
 
@@ -15,6 +17,7 @@ class PlayerVM {
         this.isActive(true);
         this.current(0);
     }
+
     deactivate() {
         this.isActive(false);
     }

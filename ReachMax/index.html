@@ -7,11 +7,11 @@
     <link rel="stylesheet" href="Styles/app.css" type="text/css" />
     <script src="Scripts/jquery-2.1.1.js"></script>
     <script src="Scripts/knockout-3.2.0.debug.js"></script>
-    <script src="ViewModels/GameVM.js"></script>
-    <script src="ViewModels/PlayerVM.js"></script>
-    <script src="ViewModels/SettingsVM.js"></script>
-    <script src="Model/Utils.js"></script>
-    <script src="Model/Main.js"></script>
+    <script src="Source/Game.js"></script>
+    <script src="Source/Player.js"></script>
+    <script src="Source/Settings.js"></script>
+    <script src="Source/Utils.js"></script>
+    <script src="Source/Main.js"></script>
 </head>
 <body>
     <h1>ReachMax</h1>
@@ -19,12 +19,23 @@
         <!-- Settings -->
         <div class="settings">
             <p>
-                <button data-bind="click: decreaseObs.bind($data.gameMax)">-</button>Game maximum: <span data-bind="text: gameMax"></span><button data-bind="click: increase">+</button>
+                <button data-bind="click: gameMaxCounter().decrease()">
+                    -
+                </button>
+                Game maximum: <span data-bind="text: gameMaxCounter().current"></span>
+                <button data-bind="click: gameMaxCounter().increase()">
+                    +
+                </button>
             </p>
             <p>Seconds per turn: <span data-bind="text: secondsPerTurn"></span></p>
         </div>
         <!-- Game -->
         <div class="game">
+            <div>
+                <input type="text" data-bind="text: playerNameInput" />
+                <button data-bind="click: addPlayer()">Add player!</button>
+            </div>
+
             <!-- Finished -->
             <div data-bind="visible: !inProgress()">
                 Game finished! Player <span data-bind="text: loser"></span> won!
@@ -38,20 +49,11 @@
                 <!-- Players -->
                 <div data-bind="foreach: players">
                     <div>
-                        Player <span data-bind="text: isActive() ? 'ACTIVE' : ''"></span>
+                        Player <span data-bind="text: name"></span> <span data-bind="text: isActive() ? 'ACTIVE' : ''"></span>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!--<span class="timer-count" data-bind="text: timer().current"></span>-->
-        <!--<progress class="timer-progress" value="0" max="100"></progress>-->
-        <!--<div id="active-player">Click to start</div>
-        <input type="submit" value="Increase" id="increase" />
-        <div id="player-action">&nbsp;</div>
-        <progress class="total-progress" value="0" max="100"></progress>
-        <div>Total: <span class="total"></span></div>
-        <div id="winner"></div>-->
     </div>
 </body>
 </html>

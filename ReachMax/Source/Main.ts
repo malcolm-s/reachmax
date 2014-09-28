@@ -1,13 +1,13 @@
 ﻿/// <reference path="../scripts/typings/jquery/jquery.d.ts" />
-var gamevm: GameVM;
-var settings: SettingsVM;
+var gamevm: Game;
+var settings: Settings;
 $(() => {
     // initialise settings - needed for building the game and players
-    settings = new SettingsVM();
+    settings = new Settings();
     ko.applyBindings(settings, document.querySelector(".settings"));
 
     // initialise game
-    gamevm = new GameVM();
+    gamevm = new Game();
     ko.applyBindings(gamevm, document.querySelector(".game"));
 
     // bind user input handler

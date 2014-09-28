@@ -1,20 +1,21 @@
 ﻿/// <reference path="../scripts/typings/knockout/knockout.d.ts" />
-declare var settings: SettingsVM;
-class GameVM {
+declare var settings: Settings;
+class Game {
     loopId: number;
 
     maximum: KnockoutObservable<number> = ko.observable<number>();
     current: KnockoutObservable<number> = ko.observable(0);
     inProgress: KnockoutComputed<boolean>;
 
-    players: KnockoutObservableArray<PlayerVM> = ko.observableArray([]);
-    loser: KnockoutObservable<PlayerVM> = ko.observable<PlayerVM>();
+    playerNameInput: KnockoutObservable<string> = ko.observable("");
+    players: KnockoutObservableArray<Player> = ko.observableArray([]);
+    loser: KnockoutObservable<Player> = ko.observable<Player>();
 
     constructor() {
         this.maximum(settings.gameMax());
         this.inProgress = ko.computed(() => this.current() != this.maximum());
 
-        this.players().add(5, () => new PlayerVM(this));
+        this.players().add(5, () => new Player(this, "test"));
         this.start();
     }
 
@@ -29,7 +30,14 @@ class GameVM {
         clearInterval(this.loopId);
     }
 
-    getActivePlayer(): PlayerVM {
+    addPlayer(): void {
+        var name = this.playerNameInput();
+        if (name !== "") {
+            this.players.push(new Player(this, name));
+        }
+    }
+
+    getActivePlayer(): Player {
         return this.players().filter(p => p.isActive())[0];
     }
 
@@ -45,13 +53,13 @@ class GameVM {
         this.players()[nextPlayerIndex].isActive(true);
     }
 
-    add(): void {
-        if (this.inProgress()) {
-            var currentScore = this.current();
-            this.current(currentScore + 1);
-        } else {
-            this.loser = ko.observable(this.getActivePlayer());
-        }
-    }
+    //add(): void {
+    //    if (this.inProgress()) {
+    //        var currentScore = this.current();
+    //        this.current(currentScore + 1);
+    //    } else {
+    //        this.loser = ko.observable(this.getActivePlayer());
+    //    }
+    //}
 }
 
