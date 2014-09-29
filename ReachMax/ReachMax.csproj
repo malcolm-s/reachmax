@@ -29,12 +29,12 @@
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="Scripts\typings\knockout\knockout.d.ts" />
     <TypeScriptCompile Include="Source\Counter.ts" />
     <TypeScriptCompile Include="Source\Definitions.d.ts" />
     <TypeScriptCompile Include="Source\Main.ts" />
     <TypeScriptCompile Include="Source\Utils.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\knockout\knockout.d.ts" />
     <TypeScriptCompile Include="Source\Game.ts" />
     <TypeScriptCompile Include="Source\Player.ts" />
     <TypeScriptCompile Include="Source\Settings.ts" />
