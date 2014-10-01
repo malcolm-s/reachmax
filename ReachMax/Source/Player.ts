@@ -7,15 +7,20 @@ class Player {
     isActive: KnockoutObservable<boolean> = ko.observable(false);
     canAdd: KnockoutComputed<boolean>;
 
-    constructor(public game: Game, name: string) {
+    constructor(public game: Game, name: string, isActive: boolean) {
         this.maximum = settings.secondsPerTurn().current();
         this.name(name);
         this.canAdd = ko.computed(() => this.current() < this.maximum);
+
+        if (this.isActive) {
+            this.activate();
+        }
     }
 
-    activate() {
+    activate(): Player {
         this.isActive(true);
         this.current(0);
+        return this;
     }
 
     deactivate() {

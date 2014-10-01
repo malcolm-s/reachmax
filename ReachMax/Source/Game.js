@@ -1,38 +1,42 @@
 ﻿/// <reference path="../scripts/typings/knockout/knockout.d.ts" />
 var Game = (function () {
     function Game() {
-        var _this = this;
         this.maximum = ko.observable();
         this.current = ko.observable(0);
         this.playerNameInput = ko.observable("");
         this.players = ko.observableArray([]);
         this.loser = ko.observable();
-        this.maximum(settings.gameMax().current());
-        this.inProgress = ko.computed(function () {
-            return _this.current() != _this.maximum();
-        });
-
-        this.players().add(1, function () {
-            return new Player(_this, "Malcolm");
-        });
-        this.start();
+        this.applySettings();
     }
     Game.prototype.start = function () {
         var _this = this;
-        this.players()[0].activate();
         this.loopId = setInterval(function () {
             return _this.activateNextPlayer();
         }, settings.secondsPerTurn().current() * 1000);
+        //this.activateNextPlayer();
     };
 
     Game.prototype.stop = function () {
         clearInterval(this.loopId);
     };
 
+    Game.prototype.applySettings = function () {
+        var _this = this;
+        this.maximum(settings.gameMax().current());
+        this.inProgress = ko.computed(function () {
+            return _this.current() != _this.maximum();
+        });
+
+        // add existing players?
+        //this.players().add(1, () => new Player(this, "Malcolm"));
+        this.start();
+    };
+
     Game.prototype.addPlayer = function () {
         var name = this.playerNameInput();
         if (name !== "") {
-            this.players.push(new Player(this, name));
+            var activatePlayer = this.players().length <= 0;
+            this.players.push(new Player(this, name, activatePlayer));
             this.playerNameInput("");
         }
     };
@@ -44,14 +48,18 @@ var Game = (function () {
     };
 
     Game.prototype.activateNextPlayer = function () {
-        var currentPlayer = this.getActivePlayer(), nextPlayerIndex = this.players().indexOf(currentPlayer) + 1;
-        currentPlayer.isActive(false);
+        if (this.players().length > 0) {
+            var currentPlayer = this.getActivePlayer();
+            var nextPlayerIndex = this.players().indexOf(currentPlayer) + 1;
 
-        if (nextPlayerIndex >= this.players().length) {
-            nextPlayerIndex = 0;
+            currentPlayer.deactivate();
+
+            if (nextPlayerIndex >= this.players().length) {
+                nextPlayerIndex = 0;
+            }
+
+            this.players()[nextPlayerIndex].activate();
         }
-
-        this.players()[nextPlayerIndex].isActive(true);
     };
     return Game;
 })();

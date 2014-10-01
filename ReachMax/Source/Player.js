@@ -1,5 +1,5 @@
 ﻿var Player = (function () {
-    function Player(game, name) {
+    function Player(game, name, isActive) {
         var _this = this;
         this.game = game;
         this.name = ko.observable("");
@@ -10,10 +10,15 @@
         this.canAdd = ko.computed(function () {
             return _this.current() < _this.maximum;
         });
+
+        if (this.isActive) {
+            this.activate();
+        }
     }
     Player.prototype.activate = function () {
         this.isActive(true);
         this.current(0);
+        return this;
     };
 
     Player.prototype.deactivate = function () {

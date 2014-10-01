@@ -20,32 +20,16 @@
         <!-- Settings -->
         <div class="settings">
             <div data-bind="foreach: counters">
-                <button data-bind="click: decrease">
-                    -
-                </button>
-                <span data-bind="text: name"></span>: <span data-bind="text: current"></span>
-                <button data-bind="click: increase">
-                    +
-                </button>
+                <div>
+                    <button data-bind="click: decrease">
+                        -
+                    </button>
+                    <span data-bind="text: name"></span>: <span data-bind="text: current"></span>
+                    <button data-bind="click: increase">
+                        +
+                    </button>
+                </div>
             </div>
-            <!--<p>
-                <button data-bind="click: gameMax().decrease()">
-                    -
-                </button>
-                Game maximum: <span data-bind="text: gameMax().current"></span>
-                <button data-bind="click: gameMax().increase()">
-                    +
-                </button>
-            </p>
-            <p>
-                <button data-bind="click: secondsPerTurn().decrease()">
-                    -
-                </button>
-                Seconds per turn: <span data-bind="text: secondsPerTurn().current"></span>
-                <button data-bind="click: secondsPerTurn().increase()">
-                    +
-                </button>
-            </p>-->
             <button type="button" data-bind="click: applySettings">Apply settings</button>
         </div>
         <!-- Game -->

@@ -12,28 +12,34 @@ class Game {
     loser: KnockoutObservable<Player> = ko.observable<Player>();
 
     constructor() {
-        this.maximum(settings.gameMax().current());
-        this.inProgress = ko.computed(() => this.current() != this.maximum());
-
-        this.players().add(1, () => new Player(this, "Malcolm"));
-        this.start();
+        this.applySettings();
     }
 
     start(): void {
-        this.players()[0].activate();
         this.loopId = setInterval(
             () => this.activateNextPlayer(),
             settings.secondsPerTurn().current() * 1000);
+        //this.activateNextPlayer();
     }
 
     stop(): void {
         clearInterval(this.loopId);
     }
 
+    applySettings(): void {
+        this.maximum(settings.gameMax().current());
+        this.inProgress = ko.computed(() => this.current() != this.maximum());
+
+        // add existing players?
+        //this.players().add(1, () => new Player(this, "Malcolm"));
+        this.start();
+    }
+
     addPlayer(): void {
         var name = this.playerNameInput();
         if (name !== "") {
-            this.players.push(new Player(this, name));
+            var activatePlayer = this.players().length <= 0;
+            this.players.push(new Player(this, name, activatePlayer));
             this.playerNameInput("");
         }
     }
@@ -43,15 +49,18 @@ class Game {
     }
 
     activateNextPlayer(): void {
-        var currentPlayer = this.getActivePlayer(),
-            nextPlayerIndex = this.players().indexOf(currentPlayer) + 1;
-        currentPlayer.isActive(false);
+        if (this.players().length > 0) {
+            var currentPlayer = this.getActivePlayer();
+            var nextPlayerIndex = this.players().indexOf(currentPlayer) + 1;
 
-        if (nextPlayerIndex >= this.players().length) {
-            nextPlayerIndex = 0;
+            currentPlayer.deactivate();
+
+            if (nextPlayerIndex >= this.players().length) {
+                nextPlayerIndex = 0;
+            }
+
+            this.players()[nextPlayerIndex].activate();
         }
-
-        this.players()[nextPlayerIndex].isActive(true);
     }
 }
 

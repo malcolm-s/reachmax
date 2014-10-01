@@ -8,7 +8,7 @@ $(() => {
 
     // initialise game
     gamevm = new Game();
-    ko.applyBindings(gamevm, document.querySelector(".game"));
+    ko.applyBindings(gamevm, settings.gameElement);
 
     // bind user input handler
     $(document).keyup(e => {
