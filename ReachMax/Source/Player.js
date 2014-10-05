@@ -35,6 +35,12 @@
             this.current(this.current() + 1);
         }
     };
+
+    Player.prototype.reset = function () {
+        this.current(0);
+        this.maximum = settings.maxIncreasePerTurn().current();
+        this.deactivate();
+    };
     return Player;
 })();
 //# sourceMappingURL=Player.js.map

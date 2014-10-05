@@ -30,7 +30,6 @@
                     </button>
                 </div>
             </div>
-            <button type="button" data-bind="click: applySettings">Apply settings</button>
         </div>
         <!-- Game -->
         <div class="game">
@@ -39,6 +38,7 @@
                 Add player: <input type="text" data-bind="value: playerNameInput, valueUpdate: 'afterkeydown'" />
                 <button type="submit" data-bind="enable: playerNameInput().length > 0">Add!</button>
             </form>
+            <button data-bind="click: applySettings">Apply settings</button>
             <!-- Finished -->
             <div data-bind="visible: !inProgress()">
                 Game finished! Player <span data-bind="text: loser"></span> won!

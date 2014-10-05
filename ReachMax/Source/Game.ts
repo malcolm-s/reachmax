@@ -13,13 +13,13 @@ class Game {
 
     constructor() {
         this.applySettings();
+        this.inProgress = ko.computed(() => this.current() != this.maximum());
     }
 
     start(): void {
         this.loopId = setInterval(
             () => this.activateNextPlayer(),
             settings.secondsPerTurn().current() * 1000);
-        //this.activateNextPlayer();
     }
 
     stop(): void {
@@ -27,11 +27,10 @@ class Game {
     }
 
     applySettings(): void {
+        this.current(0);
         this.maximum(settings.gameMax().current());
-        this.inProgress = ko.computed(() => this.current() != this.maximum());
+        this.resetPlayers();
 
-        // add existing players?
-        //this.players().add(1, () => new Player(this, "Malcolm"));
         this.start();
     }
 
@@ -49,18 +48,25 @@ class Game {
     }
 
     activateNextPlayer(): void {
-        if (this.players().length > 0) {
-            var currentPlayer = this.getActivePlayer();
-            var nextPlayerIndex = this.players().indexOf(currentPlayer) + 1;
+        var currentPlayer = this.getActivePlayer();
 
-            currentPlayer.deactivate();
-
-            if (nextPlayerIndex >= this.players().length) {
-                nextPlayerIndex = 0;
-            }
-
-            this.players()[nextPlayerIndex].activate();
+        if (currentPlayer === undefined) {
+            currentPlayer = this.players()[0].activate();
         }
+
+        var nextPlayerIndex = this.players().indexOf(currentPlayer) + 1;
+
+        currentPlayer.deactivate();
+
+        if (nextPlayerIndex >= this.players().length) {
+            nextPlayerIndex = 0;
+        }
+
+        this.players()[nextPlayerIndex].activate();
+    }
+
+    resetPlayers(): void {
+        this.players().forEach(p => p.reset());
     }
 }
 

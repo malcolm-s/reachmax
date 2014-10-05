@@ -1,19 +1,22 @@
 ﻿/// <reference path="../scripts/typings/knockout/knockout.d.ts" />
 var Game = (function () {
     function Game() {
+        var _this = this;
         this.maximum = ko.observable();
         this.current = ko.observable(0);
         this.playerNameInput = ko.observable("");
         this.players = ko.observableArray([]);
         this.loser = ko.observable();
         this.applySettings();
+        this.inProgress = ko.computed(function () {
+            return _this.current() != _this.maximum();
+        });
     }
     Game.prototype.start = function () {
         var _this = this;
         this.loopId = setInterval(function () {
             return _this.activateNextPlayer();
         }, settings.secondsPerTurn().current() * 1000);
-        //this.activateNextPlayer();
     };
 
     Game.prototype.stop = function () {
@@ -21,14 +24,10 @@ var Game = (function () {
     };
 
     Game.prototype.applySettings = function () {
-        var _this = this;
+        this.current(0);
         this.maximum(settings.gameMax().current());
-        this.inProgress = ko.computed(function () {
-            return _this.current() != _this.maximum();
-        });
+        this.resetPlayers();
 
-        // add existing players?
-        //this.players().add(1, () => new Player(this, "Malcolm"));
         this.start();
     };
 
@@ -48,18 +47,27 @@ var Game = (function () {
     };
 
     Game.prototype.activateNextPlayer = function () {
-        if (this.players().length > 0) {
-            var currentPlayer = this.getActivePlayer();
-            var nextPlayerIndex = this.players().indexOf(currentPlayer) + 1;
+        var currentPlayer = this.getActivePlayer();
 
-            currentPlayer.deactivate();
-
-            if (nextPlayerIndex >= this.players().length) {
-                nextPlayerIndex = 0;
-            }
-
-            this.players()[nextPlayerIndex].activate();
+        if (currentPlayer === undefined) {
+            currentPlayer = this.players()[0].activate();
         }
+
+        var nextPlayerIndex = this.players().indexOf(currentPlayer) + 1;
+
+        currentPlayer.deactivate();
+
+        if (nextPlayerIndex >= this.players().length) {
+            nextPlayerIndex = 0;
+        }
+
+        this.players()[nextPlayerIndex].activate();
+    };
+
+    Game.prototype.resetPlayers = function () {
+        this.players().forEach(function (p) {
+            return p.reset();
+        });
     };
     return Game;
 })();

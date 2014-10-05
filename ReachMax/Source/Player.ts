@@ -36,4 +36,10 @@ class Player {
             this.current(this.current() + 1);
         }
     }
+
+    reset(): void {
+        this.current(0);
+        this.maximum = settings.maxIncreasePerTurn().current();
+        this.deactivate();
+    }
 }

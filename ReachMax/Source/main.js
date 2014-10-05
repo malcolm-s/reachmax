@@ -4,7 +4,7 @@ var settings;
 $(function () {
     // initialise settings - needed for building the game and players
     settings = new Settings();
-    ko.applyBindings(settings, document.querySelector(".settings"));
+    ko.applyBindings(settings, settings.settingsElement);
 
     // initialise game
     gamevm = new Game();

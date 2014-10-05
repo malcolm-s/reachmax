@@ -17,21 +17,4 @@ class Settings {
         this.settingsElement = document.querySelector(".settings");
         this.gameElement = document.querySelector(".game");
     }
-
-    applySettings(): void {
-        // clean existing game element
-        ko.cleanNode(this.gameElement);
-
-        // create new game and apply bindings
-        gamevm = new Game();        
-        ko.applyBindings(gamevm, this.gameElement);
-
-        // bind user input handler
-        $(document).keyup(e => {
-            var spaceKeyCode = 32;
-            if (e.which == 32) {
-                gamevm.getActivePlayer().add();
-            }
-        });
-    }
 }
