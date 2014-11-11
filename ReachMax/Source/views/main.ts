@@ -1,7 +1,9 @@
 ﻿/// <reference path="../lib/typings/jquery/jquery.d.ts" />
 
 import settings = require("views/settings");
+import player = require("views/player");
 var tmp = settings;
+var tmp2 = player;
 $(() => {
     //// initialise settings - needed for building the game and players
     //settings = new Settings();

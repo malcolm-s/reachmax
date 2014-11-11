@@ -1,6 +1,7 @@
 ﻿/// <reference path="../lib/typings/jquery/jquery.d.ts" />
-define(["require", "exports", "views/settings"], function(require, exports, settings) {
+define(["require", "exports", "views/settings", "views/player"], function(require, exports, settings, player) {
     var tmp = settings;
+    var tmp2 = player;
     $(function () {
         //// initialise settings - needed for building the game and players
         //settings = new Settings();
