@@ -1,5 +1,7 @@
-﻿/// <reference path="../scripts/typings/knockout/knockout.d.ts" />
-declare var settings: Settings;
+﻿/// <reference path="../lib/typings/knockout/knockout.d.ts" />
+/// <reference path="settings.ts" />
+
+//declare var settings: Settings;
 class Game {
     loopId: number;
 
@@ -19,7 +21,7 @@ class Game {
     start(): void {
         this.loopId = setInterval(
             () => this.activateNextPlayer(),
-            settings.secondsPerTurn().current() * 1000);
+            2);//settings.secondsPerTurn().current() * 1000);
     }
 
     stop(): void {
@@ -28,7 +30,7 @@ class Game {
 
     applySettings(): void {
         this.current(0);
-        this.maximum(settings.gameMax().current());
+        this.maximum(2);//settings.gameMax().current());
         this.resetPlayers();
 
         this.start();

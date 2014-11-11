@@ -5,58 +5,14 @@
     <meta charset="utf-8" />
     <title>ReachMax</title>
     <link rel="stylesheet" href="Styles/app.css" type="text/css" />
-    <script src="Scripts/jquery-2.1.1.js"></script>
-    <script src="Scripts/knockout-3.2.0.debug.js"></script>
-    <script src="Source/Game.js"></script>
-    <script src="Source/Player.js"></script>
-    <script src="Source/Counter.js"></script>
-    <script src="Source/Settings.js"></script>
-    <script src="Source/Utils.js"></script>
-    <script src="Source/Main.js"></script>
+    <script src="Source/lib/require.js"></script>
+    <script src="Source/require/config.js"></script>
 </head>
 <body>
-    <h1>ReachMax</h1>
-    <div class="content">
-        <!-- Settings -->
-        <div class="settings">
-            <div data-bind="foreach: counters">
-                <div>
-                    <button data-bind="click: decrease">
-                        -
-                    </button>
-                    <span data-bind="text: name"></span>: <span data-bind="text: current"></span>
-                    <button data-bind="click: increase">
-                        +
-                    </button>
-                </div>
-            </div>
-        </div>
-        <!-- Game -->
-        <div class="game">
-            <!-- Add players -->
-            <form data-bind="submit: addPlayer">
-                Add player: <input type="text" data-bind="value: playerNameInput, valueUpdate: 'afterkeydown'" />
-                <button type="submit" data-bind="enable: playerNameInput().length > 0">Add!</button>
-            </form>
-            <button data-bind="click: applySettings">Apply settings</button>
-            <!-- Finished -->
-            <div data-bind="visible: !inProgress()">
-                Game finished! Player <span data-bind="text: loser"></span> won!
-            </div>
-            <!-- In Progress -->
-            <div data-bind="visible: inProgress()">
-                <!-- Score -->
-                <span>
-                    Current total: <span data-bind="text: current"></span> out of <span data-bind="text: maximum"></span>
-                </span>
-                <!-- Players -->
-                <div data-bind="foreach: players">
-                    <div>
-                        Player <span data-bind="text: name"></span> <span data-bind="text: isActive() ? 'ACTIVE' : ''"></span>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="settings">
+        <counter params="{ current: gameMax, maximum: 30, name: 'Game max' }"></counter>
+        <counter params="{ current: secondsPerTurn, maximum: 10, name: 'Seconds per turn' }"></counter>
+        <counter params="{ current: maxIncreasePerTurn, maximum: 10, name: 'Max increase per turn' }"></counter>
     </div>
 </body>
 </html>

@@ -1,4 +1,4 @@
-﻿declare var settings: Settings;
+﻿/// <reference path="settings.ts" />
 
 class Player {
     name: KnockoutObservable<string> = ko.observable("");
@@ -8,7 +8,7 @@ class Player {
     canAdd: KnockoutComputed<boolean>;
 
     constructor(public game: Game, name: string, isActive: boolean) {
-        this.maximum = settings.secondsPerTurn().current();
+        this.maximum = 4;// settings.secondsPerTurn().current();
         this.name(name);
         this.canAdd = ko.computed(() => this.current() < this.maximum);
 
@@ -39,7 +39,7 @@ class Player {
 
     reset(): void {
         this.current(0);
-        this.maximum = settings.maxIncreasePerTurn().current();
+        this.maximum = 4;// settings.maxIncreasePerTurn().current();
         this.deactivate();
     }
 }

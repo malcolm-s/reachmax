@@ -1,6 +1,6 @@
-﻿/// <reference path="../scripts/typings/jquery/jquery.d.ts" />
-var gamevm;
-var settings;
+﻿/// <reference path="../lib/typings/jquery/jquery.d.ts" />
+//var gamevm: Game;
+//var settings: Settings;
 $(function () {
     //// initialise settings - needed for building the game and players
     //settings = new Settings();

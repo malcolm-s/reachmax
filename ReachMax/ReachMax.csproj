@@ -19,28 +19,38 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <None Include="Scripts\jquery-2.1.1.intellisense.js" />
-    <Content Include="Scripts\jquery-2.1.1.js" />
-    <Content Include="Scripts\jquery-2.1.1.min.js" />
-    <Content Include="Scripts\knockout-3.2.0.debug.js" />
-    <Content Include="Scripts\knockout-3.2.0.js" />
+    <None Include="Source\lib\jquery-2.1.1.intellisense.js" />
+    <Content Include="Source\components\counter\template.html" />
+    <Content Include="Source\lib\jquery-2.1.1.js" />
+    <Content Include="Source\lib\jquery-2.1.1.min.js" />
+    <Content Include="Source\lib\knockout-3.2.0.debug.js" />
+    <Content Include="Source\lib\knockout-3.2.0.js" />
+    <Content Include="Source\lib\r.js" />
+    <Content Include="Source\lib\require.js" />
+    <Content Include="Source\text.js" />
     <Content Include="Styles\app.css" />
     <Content Include="index.html" />
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="Scripts\typings\knockout\knockout.d.ts" />
-    <TypeScriptCompile Include="Source\Counter.ts" />
-    <TypeScriptCompile Include="Source\Definitions.d.ts" />
-    <TypeScriptCompile Include="Source\Main.ts" />
-    <TypeScriptCompile Include="Source\Utils.ts" />
-    <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
-    <TypeScriptCompile Include="Source\Game.ts" />
-    <TypeScriptCompile Include="Source\Player.ts" />
-    <TypeScriptCompile Include="Source\Settings.ts" />
+    <TypeScriptCompile Include="Source\components\counter\register.ts" />
+    <TypeScriptCompile Include="Source\components\counter\viewModel.ts" />
+    <TypeScriptCompile Include="Source\require\config.ts" />
+    <TypeScriptCompile Include="Source\lib\typings\knockout\knockout.d.ts" />
+    <TypeScriptCompile Include="Source\lib\typings\requirejs\require.d.ts" />
+    <TypeScriptCompile Include="Source\model\Counter.ts" />
+    <TypeScriptCompile Include="Source\model\Definitions.d.ts" />
+    <TypeScriptCompile Include="Source\model\Main.ts" />
+    <TypeScriptCompile Include="Source\model\Utils.ts" />
+    <TypeScriptCompile Include="Source\lib\typings\jquery\jquery.d.ts" />
+    <TypeScriptCompile Include="Source\model\Game.ts" />
+    <TypeScriptCompile Include="Source\model\Player.ts" />
+    <TypeScriptCompile Include="Source\model\Settings.ts" />
+    <TypeScriptCompile Include="Source\views\main.ts" />
+    <TypeScriptCompile Include="Source\views\settings.ts" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Scripts\jquery-2.1.1.min.map" />
+    <Content Include="Source\lib\jquery-2.1.1.min.map" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -48,6 +58,7 @@
       <DependentUpon>web.config</DependentUpon>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>
   </PropertyGroup>
@@ -77,6 +88,7 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
     <TypeScriptRemoveComments>false</TypeScriptRemoveComments>
     <TypeScriptSourceMap>true</TypeScriptSourceMap>
+    <TypeScriptModuleKind>amd</TypeScriptModuleKind>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <TypeScriptRemoveComments>true</TypeScriptRemoveComments>
