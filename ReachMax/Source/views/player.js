@@ -11,5 +11,7 @@
     })();
 
     var player = new PlayerVM("Ted", true);
+
+    ko.applyBindings(player, document.querySelector(".player"));
 });
 //# sourceMappingURL=player.js.map

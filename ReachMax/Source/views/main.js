@@ -1,21 +1,17 @@
 ﻿/// <reference path="../lib/typings/jquery/jquery.d.ts" />
-define(["require", "exports", "views/settings", "views/player"], function(require, exports, settings, player) {
+define(["require", "exports", "views/settings", "model/Game"], function(require, exports, settings, G) {
     var tmp = settings;
-    var tmp2 = player;
+
+    var Game = G.Game;
+
     $(function () {
-        //// initialise settings - needed for building the game and players
-        //settings = new Settings();
-        //ko.applyBindings(settings, settings.settingsElement);
-        //// initialise game
-        //gamevm = new Game();
-        //ko.applyBindings(gamevm, settings.gameElement);
-        //// bind user input handler
-        //$(document).keyup(e => {
-        //    var spaceKeyCode = 32;
-        //    if (e.which == 32) {
-        //        gamevm.getActivePlayer().add();
-        //    }
-        //});
+        var game = new Game();
+
+        game.start();
+        game.addPlayer("Ted");
+        game.addPlayer("Jim");
+
+        game.log();
     });
 });
 //# sourceMappingURL=main.js.map

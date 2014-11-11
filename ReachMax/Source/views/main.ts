@@ -1,24 +1,20 @@
 ﻿/// <reference path="../lib/typings/jquery/jquery.d.ts" />
 
+// views
 import settings = require("views/settings");
-import player = require("views/player");
 var tmp = settings;
-var tmp2 = player;
+
+// models
+import G = require("model/Game");
+var Game = G.Game;
+
 $(() => {
-    //// initialise settings - needed for building the game and players
-    //settings = new Settings();
-    //ko.applyBindings(settings, settings.settingsElement);
+    var game = new Game();
 
-    //// initialise game
-    //gamevm = new Game();
-    //ko.applyBindings(gamevm, settings.gameElement);
+    game.start();
+    game.addPlayer("Ted");
+    game.addPlayer("Jim");
 
-    //// bind user input handler
-    //$(document).keyup(e => {
-    //    var spaceKeyCode = 32;
-    //    if (e.which == 32) {
-    //        gamevm.getActivePlayer().add();
-    //    }
-    //});
+    game.log();
 });
 

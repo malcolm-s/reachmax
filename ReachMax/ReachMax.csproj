@@ -21,6 +21,7 @@
     <Content Include="packages.config" />
     <None Include="Source\lib\jquery-2.1.1.intellisense.js" />
     <Content Include="Source\components\counter\template.html" />
+    <Content Include="Source\components\player\template.html" />
     <Content Include="Source\lib\jquery-2.1.1.js" />
     <Content Include="Source\lib\jquery-2.1.1.min.js" />
     <Content Include="Source\lib\knockout-3.2.0.debug.js" />
@@ -35,18 +36,20 @@
   <ItemGroup>
     <TypeScriptCompile Include="Source\components\counter\register.ts" />
     <TypeScriptCompile Include="Source\components\counter\viewModel.ts" />
+    <TypeScriptCompile Include="Source\components\player\register.ts" />
+    <TypeScriptCompile Include="Source\components\player\viewModel.ts" />
     <TypeScriptCompile Include="Source\require\config.ts" />
     <TypeScriptCompile Include="Source\lib\typings\knockout\knockout.d.ts" />
     <TypeScriptCompile Include="Source\lib\typings\requirejs\require.d.ts" />
-    <TypeScriptCompile Include="Source\model\Counter.ts" />
     <TypeScriptCompile Include="Source\model\Definitions.d.ts" />
     <TypeScriptCompile Include="Source\model\Main.ts" />
     <TypeScriptCompile Include="Source\model\Utils.ts" />
     <TypeScriptCompile Include="Source\lib\typings\jquery\jquery.d.ts" />
-    <TypeScriptCompile Include="Source\model\Game.ts" />
+    <TypeScriptCompile Include="Source\model\game.ts" />
     <TypeScriptCompile Include="Source\model\Player.ts" />
     <TypeScriptCompile Include="Source\model\Settings.ts" />
     <TypeScriptCompile Include="Source\views\main.ts" />
+    <TypeScriptCompile Include="Source\views\player.ts" />
     <TypeScriptCompile Include="Source\views\settings.ts" />
   </ItemGroup>
   <ItemGroup>

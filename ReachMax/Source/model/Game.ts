@@ -1,7 +1,39 @@
-﻿/// <reference path="../lib/typings/knockout/knockout.d.ts" />
-/// <reference path="settings.ts" />
+﻿import P = require("model/Player");
+var Player = P.Player;
 
-//declare var settings: Settings;
+export class Game {
+    currentSecond: number = 1;
+    secondsPerTurn: number = 5;
+
+    players: P.Player[] = [];
+
+    public start(): void {
+        console.log("Start");
+        setInterval(() => this.tick(), 1000);
+    }
+
+    public addPlayer(name: string): void {
+        this.players.push(new Player(name, true));
+    }
+
+    public log(): void {
+        console.log(this);
+    }
+
+    private tick(): void {
+        console.log("Tick: " + this.currentSecond);
+        if (this.currentSecond + 1 > this.secondsPerTurn) {
+            this.reset();
+        } else {
+            this.currentSecond += 1;
+        }
+    }
+
+    private reset(): void {
+        this.currentSecond = 1;
+    }
+}
+
 //class Game {
 //    loopId: number;
 

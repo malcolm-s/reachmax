@@ -14,4 +14,4 @@ class PlayerVM {
 
 var player = new PlayerVM("Ted", true);
 
-ko.applyBindings(player, document.querySelector(".player");
+ko.applyBindings(player, document.querySelector(".player"));
